@@ -1,0 +1,35 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: apk add --no-cache rsync openssh
+    - run: mkdir -p ~/.ssh
+    - run: echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_dsa
+    - run: chmod 600 ~/.ssh/id_ds
+    - run: npm install
+    - run: lerna bootstrap
+    - run: npm run build:client
+    - run: cp -R packages/client/dist dist
+    - run: rsync -rav -e 'ssh -p 22' --delete dist/ ci@185.204.3.140:/var/www/secreate/html/
