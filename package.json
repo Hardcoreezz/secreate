@@ -1,0 +1,12 @@
+{
+  "name": "secreate",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.22.0"
+  },
+  "scripts": {
+    "start:client": "lerna run --scope client start --stream",
+    "start:server": "lerna run --scope server start --stream",
+    "build:client": "lerna run --scope client build"
+  }
+}
