@@ -27,7 +27,7 @@ jobs:
     - run: npm install --global lerna
     - run: lerna bootstrap
     - run: npm run build:client
-      uses: easingthemes/ssh-deploy@v2.1.1
+    - uses: easingthemes/ssh-deploy@v2.1.1
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         SOURCE: "packages/client/dist/"
