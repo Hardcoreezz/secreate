@@ -24,7 +24,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: apk add --no-cache rsync openssh
     - run: mkdir -p ~/.ssh
     - run: echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_dsa
     - run: chmod 600 ~/.ssh/id_ds
