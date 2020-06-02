@@ -24,12 +24,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        private: ${{ secrets.SSH_PRIVATE_KEY }}
-    - run: mkdir -p ~/.ssh
-    - run: echo "$private" >> ~/.ssh/id_rsa
-    - run: chmod 600 ~/.ssh/id_rsa
     - run: npm install --global lerna
     - run: lerna bootstrap
     - run: npm run build:client
-    - run: cp -R packages/client/dist dist
-    - run: rsync -rav -e 'ssh -p 22' --delete dist/ ci@185.204.3.140:/var/www/secreate/html/
+      uses: easingthemes/ssh-deploy@v2.1.1
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SOURCE: "packages/client/dist/"
+        REMOTE_HOST: "185.204.3.140"
+        REMOTE_USER: "ci"
+        TARGET: "/var/www/secreate/html/"
