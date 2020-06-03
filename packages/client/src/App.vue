@@ -10,7 +10,7 @@
         :currencySymbols="currencySymbols"
         @deleteProduct="deleteProduct"
       />
-      <div v-if="!products.length" class="empty">Ваша козина пуста</div>
+      <div v-if="!products.length" class="empty">Ваша корзина пуста</div>
       <button @click="calculatePrice" class="count-price" v-else>Рассчитать</button>
     </div>
     <div v-if="Object.keys(calculatedPrice).length" class="calculated-price">
