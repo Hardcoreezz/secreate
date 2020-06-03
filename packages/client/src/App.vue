@@ -62,7 +62,7 @@ export default {
         })
       }
       axios.post(
-        `http://${process.env.NODE_ENV === 'production' ? process.env.HOST : 'http://localhost:8080'}/calculate-cart-price`,
+        'http://185.204.3.140:3000/calculate-cart-price',
         data
       ).then(response => {
         this.calculatedPrice = response.data
