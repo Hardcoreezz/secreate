@@ -61,7 +61,10 @@ export default {
           quantity: product.quantity
         })
       }
-      axios.post('http://localhost:3000/calculate-cart-price', data).then(response => {
+      axios.post(
+        `http://${process.env.NODE_ENV === 'production' ? process.env.HOST : 'http://localhost:8080'}/calculate-cart-price`,
+        data
+      ).then(response => {
         this.calculatedPrice = response.data
       })
     }
