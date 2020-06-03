@@ -1,10 +1,11 @@
 const calculateCartPrice = require('./calculateCartPrice')
 const express = require('express')
+require('dotenv').config()
 const cors = require('cors')
 const axios = require('axios')
 const app = express()
 
-let whitelist = ['http://localhost:8080']
+let whitelist = [process.env.NODE_ENV === 'production' ? process.env.HOST : 'http://localhost:8080']
 
 let corsOptions = {
   origin(origin, callback) {

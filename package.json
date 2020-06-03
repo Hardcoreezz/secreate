@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start:client": "lerna run --scope client start --stream",
-    "start:server": "lerna run --scope server start --stream",
+    "start:server": "lerna run --scope server start:prod --stream",
     "build:client": "lerna run --scope client build"
   }
 }
