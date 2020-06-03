@@ -45,4 +45,4 @@ jobs:
         name: id_rsa # optional
         known_hosts: $REMOTE_HOST
 
-    - run: ssh ci@$REMOTE_HOST "cd /home/secreate/;git pull;lerna bootstrap;killall node;nohup npm run start:server &"
+    - run: ssh ci@${{ env.REMOTE_HOST }} "cd /home/secreate/;git pull;lerna bootstrap;killall node;nohup npm run start:server &"
