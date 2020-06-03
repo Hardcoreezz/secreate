@@ -34,3 +34,8 @@ jobs:
         REMOTE_HOST: "185.204.3.140"
         REMOTE_USER: "ci"
         TARGET: "/var/www/secreate/html/"
+    - run: ssh ci@185.204.3.140
+    - run: cd /home/secreate
+    - run: git pull
+    - run: lerna bootstrap
+    - run: npm run start:server
