@@ -6,6 +6,10 @@ env:
   PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   REMOTE_HOST: "185.204.3.140"
 
+defaults:
+  run:
+    shell: bash
+
 on:
   push:
     branches: [ master ]
@@ -45,4 +49,4 @@ jobs:
         name: id_rsa # optional
         known_hosts: $REMOTE_HOST
 
-    - run: ssh ci@${{ env.REMOTE_HOST }} "cd /home/secreate/;git pull;lerna bootstrap;killall node;nohup npm run start:server &"
+    - run: ssh ci@$REMOTE_HOST "cd /home/secreate/;git pull;lerna bootstrap;killall node;nohup npm run start:server &"
