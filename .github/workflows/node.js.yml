@@ -36,17 +36,17 @@ jobs:
     - run: npm run build:client
     - uses: easingthemes/ssh-deploy@v2.1.1
       env:
-        SSH_PRIVATE_KEY: $PRIVATE_KEY
+        SSH_PRIVATE_KEY: ${{ env.PRIVATE_KEY }}
         SOURCE: "packages/client/dist/"
-        REMOTE_HOST: $REMOTE_HOST
+        REMOTE_HOST: ${{ env.REMOTE_HOST }}
         REMOTE_USER: "ci"
         TARGET: "/var/www/secreate/html/"
 
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
       with:
-        key: $PRIVATE_KEY
+        key: ${{ env.PRIVATE_KEY }}
         name: id_rsa # optional
-        known_hosts: $REMOTE_HOST
+        known_hosts: ${{ env.REMOTE_HOST }}
 
     - run: ssh ci@$REMOTE_HOST "cd /home/secreate/;git pull;lerna bootstrap;killall node;nohup npm run start:server &"
