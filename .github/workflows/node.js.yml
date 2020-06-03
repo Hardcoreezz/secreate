@@ -42,4 +42,4 @@ jobs:
         name: id_rsa # optional
         known_hosts: "185.204.3.140"
 
-    - run: ssh ci@185.204.3.140 -c "cd /home/secreate/;git pull;lerna bootstrap;npm run start:server"
+    - run: ssh ci@185.204.3.140 "cd /home/secreate/;git pull;lerna bootstrap;npm run start:server"
