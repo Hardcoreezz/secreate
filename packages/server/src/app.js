@@ -5,7 +5,7 @@ const cors = require('cors')
 const axios = require('axios')
 const app = express()
 
-let whitelist = ['http://185.204.3.140:3000', 'http://185.204.3.140:8080', 'http://localhost:8080']
+let whitelist = ['http://185.204.3.140:3000', 'http://185.204.3.140:8080', 'http://185.204.3.140', 'http://localhost:8080']
 
 let corsOptions = {
   origin(origin, callback) {
