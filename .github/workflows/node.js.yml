@@ -35,11 +35,13 @@ jobs:
         REMOTE_USER: "ci"
         TARGET: "/var/www/secreate/html/"
 
-    - run: mkdir -p ~/.ssh
-    - run: echo $PRIVATE_KEY >> ~/.ssh/id_rsa
-      env:
-        PRIVATE_KEY: {{ secrets.SSH_DEV_PRIVATE_KEY }}
-    - run: chmod 600 ~/.ssh/id_rsa
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        name: id_rsa # optional
+        known_hosts: "185.204.3.140"
+
     - run: ssh ci@185.204.3.140
     - run: cd /home/secreate
     - run: git pull
