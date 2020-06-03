@@ -10,7 +10,7 @@ const calculateCartPrice = (currencies, products, requestCurrency = 'RUB') => {
   }
   for (let key in result) {
     if (key === requestCurrency) continue
-    result[key] = result.RUB / currencies[key].Value
+    result[key] = result[requestCurrency] / currencies[key].Value
   }
   return result
 }
